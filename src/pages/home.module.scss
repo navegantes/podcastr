@@ -7,6 +7,7 @@
   h2 {
     margin-top: 3rem;
     margin-bottom: 1.5rem;
+    color: #afafaf;
   }
 }
 
@@ -19,13 +20,13 @@
 
     li {
       background: #373838; //var(--white);
-      border: 1px solid #5d5869; //var(--gray-100);
+      // border: 1px solid #5d5869; //var(--gray-100);
       padding: 1.25rem;
       border-radius: 1.5rem;
       position: relative;
       display: flex;
       align-items: center;
-      box-shadow: 0 0 1em #5d5869; //#e2e2e2;
+      box-shadow: 0 0 1em #44414b; //#e2e2e2;
 
       img {
         width: 6rem;
@@ -74,7 +75,7 @@
               width: 10px;
               height: 4px;
               border-radius: 2px;
-              background: #ddd;
+              background: var(--gray-500);
               position: absolute;
               left: 0;
               top: 50%;
@@ -112,58 +113,94 @@
 
 .allEpisodes {
   padding-bottom: 2rem;
+  margin: 0 auto;
+  // border: 1px solid white;
 
-  table {
-    width: 100%;
+  // img {
+  //   width: 2.7rem;
+  //   height: 2.7rem;
+  //   border-radius: 1rem;
+  // }
 
-    th,
-    td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--gray-100);
+  a {
+    color: var(--gray-200);
+    font-family: Lexend, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .epCard {
+    display: flex;
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: #373838;
+    border-radius: 1.5rem;
+    gap: 2rem;
+
+    img {
+      width: 12rem;
+      height: 8rem;
+      border-radius: 1rem;
     }
 
-    th {
-      color: var(--gray-200);
-      text-transform: uppercase;
-      font: 500 0.75rem Lexend, sans-serif;
-      text-align: left;
-    }
+    .epInfos {
+      line-height: 1.675rem;
+      color: var(--gray-800);
+      text-align: justify;
+      position: relative;
+      width: 100%;
+      // border: 1px solid lime;
 
-    td {
-      font-size: 0.75rem;
-
-      img {
-        width: 2.7rem;
-        height: 2.7rem;
-        border-radius: 0.5rem;
+      .epDescription {
+        color: #afafaf;
+        text-align: justify;
+        // border: 1px solid white;
       }
 
-      a {
-        color: var(--gray-500);
-        font-family: Lexend, sans-serif;
-        font-weight: 600;
-        text-decoration: none;
-        line-height: 1.4rem;
-        font-size: 1rem;
+      .members {
+        margin-top: 0.5rem;
+        color: #d1c5b5;
+      }
 
-        &:hover {
-          text-decoration: underline;
+      span {
+        color: aquamarine;
+
+        &:first-of-type::after {
+          display: inline-block;
+          content: "";
+          width: 10px;
+          height: 0.5px;
+          border-radius: 3px;
+          margin: 0 0.5rem;
+          border: 2px solid;
+          transform: translate(0, -50%);
+          position: relative;
+          bottom: 3px;
         }
       }
 
       button {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 2rem;
+        height: 2rem;
         background: #47494a; //var(--white);
         border: 1px solid var(--gray-800);
         border-radius: 0.5rem;
         font-size: 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
 
         transition: filter 0.2s;
 
         img {
-          width: 1rem;
-          height: 1rem;
+          width: 1.5rem;
+          height: 1.5rem;
         }
 
         &:hover {
