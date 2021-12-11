@@ -14,7 +14,7 @@ type Episode = {
   id: string;
   title: string;
   thumbnail: string;
-  // description: string;
+  description: string;
   members: string;
   duration: number;
   durationAsString: string;
@@ -59,7 +59,10 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button" onClick={() => playList(episodeList, index)}>
+                <button
+                  type="button"
+                  onClick={() => playList(episodeList, index)}
+                >
                   <img src="/play-green.svg" alt="Tocar episódio" />
                 </button>
               </li>
@@ -68,54 +71,53 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         </ul>
       </section>
       <section className={styles.allEpisodes}>
+        {/* className={styles.allEpisodes}> */}
         <h2>Todos episódios</h2>
-        <table cellSpacing={0}>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Podcast</th>
-              <th>Integrantes</th>
-              <th>Data</th>
-              <th>Duração</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {allEpisodes.map((episode, index) => {
-              return (
-                <tr key={episode.id}>
-                  <td style={{ width: 82 }}>
-                    <Image
-                      width={120}
-                      height={120}
-                      src={episode.thumbnail}
-                      alt={episode.title}
-                      objectFit="cover"
-                    />
-                  </td>
-                  <td>
-                    <Link href={`/episodes/${episode.id}`}>
-                      <a>{episode.title}</a>
-                    </Link>
-                  </td>
-                  <td>{episode.members}</td>
-                  <td style={{ width: 120 }}>{episode.publishedAt}</td>
-                  <td>{episode.durationAsString}</td>
-                  <td>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        playList(episodeList, index + latestEpisodes.length)
-                      }
-                    >
-                      <img src="/play-green.svg" alt="Tocar episódio" />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+
+        <div>
+          {allEpisodes.map((episode, index) => {
+            return (
+              <div key={episode.id} className={styles.epCard}>
+                {/* <div style={{ width: 82 }}> */}
+                {/* <div className={styles.epInfos}> */}
+                <Image
+                  width={192}
+                  height={192}
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                  objectFit="cover"
+                />
+                {/* </div> */}
+
+                <div className={styles.epInfos}>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
+                  <div
+                    className={styles.epDescription}
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        episode.description.slice(0, 250) + " ...</p>",
+                    }}
+                  />
+
+                  <p className={styles.members}>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      playList(episodeList, index + latestEpisodes.length)
+                    }
+                  >
+                    <img src="/play-green.svg" alt="Tocar episódio" />
+                  </button>
+                </div>
+                {/* </div> */}
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );
@@ -141,8 +143,10 @@ export const getStaticProps: GetStaticProps = async () => {
         locale: ptBR,
       }),
       duration: Number(episode.file.duration),
-      // description: episode.description,
-      durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
+      description: episode.description,
+      durationAsString: convertDurationToTimeString(
+        Number(episode.file.duration)
+      ),
       url: episode.file.url,
     };
   });
